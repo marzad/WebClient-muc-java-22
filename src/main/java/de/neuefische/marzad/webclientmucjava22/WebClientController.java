@@ -1,8 +1,8 @@
 package de.neuefische.marzad.webclientmucjava22;
-
+/*
 import de.neuefische.marzad.webclientmucjava22.NewMessage;
 import de.neuefische.marzad.webclientmucjava22.Repo;
-import de.neuefische.marzad.webclientmucjava22.SuccessClass;
+import de.neuefische.marzad.webclientmucjava22.SuccessClass;*/
 import org.springframework.http.HttpMethod;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -10,8 +10,8 @@ import org.springframework.web.reactive.function.client.WebClient;
 @RestController
 @RequestMapping("/api")
 public class WebClientController {
-    @GetMapping("getting")
-    public Repo getAnimal () {
+    @GetMapping("do-something")
+    public SuccessClass doSomething () {
         Repo repos = WebClient
                 .builder()
                 .baseUrl("https://eoq2vuf7lltn3qi.m.pipedream.net")
@@ -22,12 +22,10 @@ public class WebClientController {
                         clientResponse -> clientResponse.bodyToMono(Repo.class)
                 ).block();
 
-        return repos;
-    }
+        NewMessage newMessage = new NewMessage(2, repos.animal() + repos.description());
 
-    @PostMapping("/posting")
-    public SuccessClass postMessage (@RequestBody NewMessage newMessage) {
-        SuccessClass user = WebClient
+
+        SuccessClass success = WebClient
                 .builder()
                 .baseUrl("https://eolhzflzeqdbtg3.m.pipedream.net")
                 .build()
@@ -37,6 +35,6 @@ public class WebClientController {
                 .exchangeToMono(
                         clientResponse -> clientResponse.bodyToMono(SuccessClass.class)
                 ).block();
-        return user;
+        return success;
     }
 }
