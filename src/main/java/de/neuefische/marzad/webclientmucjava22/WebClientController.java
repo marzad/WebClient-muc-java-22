@@ -22,7 +22,7 @@ public class WebClientController {
                         clientResponse -> clientResponse.bodyToMono(Repo.class)
                 ).block();
 
-        NewMessage newMessage = new NewMessage(2, repos.animal() + repos.description());
+        NewMessage newMessage = new NewMessage(2, repos.animal() + " " + repos.description());
 
 
         SuccessClass success = WebClient
