@@ -2,7 +2,7 @@ package de.neuefische.marzad.webclientmucjava22;
 
 import de.neuefische.marzad.webclientmucjava22.NewMessage;
 import de.neuefische.marzad.webclientmucjava22.Repo;
-import de.neuefische.marzad.webclientmucjava22.SuccesClass;
+import de.neuefische.marzad.webclientmucjava22.SuccessClass;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -26,8 +26,8 @@ public class WebClientController {
     }
 
     @PostMapping("/posting")
-    public SuccesClass postMessage (@RequestBody NewMessage newMessage) {
-        SuccesClass user = WebClient
+    public SuccessClass postMessage (@RequestBody NewMessage newMessage) {
+        SuccessClass user = WebClient
                 .builder()
                 .baseUrl("https://eolhzflzeqdbtg3.m.pipedream.net")
                 .build()
@@ -35,7 +35,7 @@ public class WebClientController {
                 .uri("")
                 .bodyValue(newMessage)
                 .exchangeToMono(
-                        clientResponse -> clientResponse.bodyToMono(SuccesClass.class)
+                        clientResponse -> clientResponse.bodyToMono(SuccessClass.class)
                 ).block();
         return user;
     }
